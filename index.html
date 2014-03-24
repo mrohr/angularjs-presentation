@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=1024, user-scalable=no">
+
+	<title>AngularJS</title>
+
+	<link rel="stylesheet" href="core/deck.core.css">
+	<link rel="stylesheet" href="extensions/hash/deck.hash.css">
+	<link rel="stylesheet" href="extensions/scale/deck.scale.css">
+	<link rel="stylesheet" href="css/themes/style/web-2.0.css">
+	<link rel="stylesheet" href="css/themes/transition/horizontal-slide.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <style>
+    .deck-container code{
+      font-size:80%;
+    }
+  </style>
+
+  <script src="js/jquery-1.7.2.min.js"></script>
+	<script src="js/modernizr.custom.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="core/deck.core.js"></script>
+  <script src="extensions/hash/deck.hash.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</head>
+<body class="deck-container">
+
+<!-- Begin slides. Just make elements with a class of slide. -->
+<div id="logo"></div>
+<section class="slide">
+	<h1>AngularJS</h1>
+</section>
+
+<section class="slide">
+	<center>
+		<h2>About Me</h2>
+		<h3>Matt Rohr</h3>
+		<h4>Software Engineer @ Altamira</h4>
+		<h4>Radford University</h4>
+		<h4>Intern for 3 years @ Near Infinity</h4>
+	</center>
+</section>
+
+<section class="slide">
+	<h2>Questions:</h2>
+		<ul>
+			<li class="slide">Who works with web development day to day?</li>
+			<li class="slide">Who has used a front end Javascript framework?</li>
+			<li class="slide">Who has used AngularJS?</li>
+		</ul>
+</section>
+
+<section class="slide">
+	<h2>Front End Frameworks</h2>
+		<p>Rendering your web application on the client side in javascript</p>
+		<h3 class="slide">Why should we use one?</h3>
+		<ul>
+			<li class="slide">Less load on the server</li>
+			<li class="slide">Client machines are getting faster</li>
+			<li class="slide">HTML is not dynamic (DOM manipulation is the worst) </li>
+			<li class="slide">Rise of Single Page Applications (SPA)</li>
+		</ul>
+</section>
+
+<section class="slide">
+	<h2>Front End Frameworks</h2>
+	<ul>
+		<li class="slide">Backbone.js</li>
+		<li class="slide">Ember.js</li>
+		<li class="slide">ExtJS</li>
+		<li class="slide">Knockout.js</li>
+		<li class="slide">batman.js</li>
+		<li class="slide">Maria</li>
+		<li class="slide">CanJS</li>
+		<li class="slide">Agility.js</li>
+		<li class="slide">.....</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>AngularJS</h2>
+	<h3>Powered by Google</h3>
+	<h3>v0.9 3 years ago</h3>
+	<h3>v1.0.8 current stable version</h3>
+</section>
+
+<section class="slide">
+	<h2>AngularJS</h2>
+	<h3>Fully Featured SPA framework</h3>
+	<ul>
+		<li class="slide">Two-Way Databinding/Templating</li>
+		<li class="slide">MVC/MVVM, MVW</li>
+		<li class="slide">Routing</li>
+		<li class="slide">Factories/Services</li>
+		<li class="slide">Dependency Injection</li>
+		<li class="slide">Validation</li>
+		<li class="slide">Directives</li>
+		<li class="slide">jqLite</li>
+		<li class="slide">Testing</li>
+		<li class="slide">More!</li>
+	</ul>
+</section>
+
+<section class="slide">
+	<h2>Agenda</h2>
+	<ul>
+		<li>Controllers, Templating and $scope</li>
+		<li>DI, Services and Factories</li>
+		<li>Directives</li>
+		<li>Questions</li>
+</section>
+
+<section class="slide">
+	<h2>Basic Data Binding Example</h2>
+	<pre class="pull-left" style="margin-right:100px"><code class="prettyprint">
+&lt;div ng-app&gt;
+  &lt;input ng-model="name"&gt;
+  &lt;h4&gt;Hello {{name}} !&lt;/h4&gt;
+&lt;/div&gt;
+	</code></pre>
+  <br/>
+  <ul>
+    <li class="slide">ng-app: sets the scope of the angular app</li>
+    <li class="slide">ng-model: links this input with a model named 'name'</li>
+    <li class="slide">{{name}}: interprets inside as an expression, 'name' set by the input bound by ng-model</li>
+  </ul>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+
+	<div id="helloApp" ng-app="helloApp">
+		<input ng-model="name">
+		<h4>Hello {{name}} !</h4>
+	</div>
+</section>
+
+<section class="slide">
+  <h2>MVC Essentials</h2>
+  <h3 class="scope">$scope</h3>
+  <ul>
+    <li class="slide">An application's model</li>
+    <li class="slide">Context used by expressions in the view</li>
+    <li class="slide">Glue to bridge the controller and the view</li>
+    <li class="slide">All applications have a $rootScope</li>
+    <li class="slide">Different directives can create children scopes</li>
+  </ul>
+  <h3 class="slide">Controllers</h3>
+  <ul>
+    <li class="slide">Defined with ng-controller directive</li>
+    <ul>
+      <li class="slide">expression = name of a function that defines a $scope</li>
+    </ul>
+    <li class="slide">Shouldn't do much, only buisness logic for its scope</li>
+    <ul>
+      <li class="slide">Anything more should be defined as a service</li>
+    </ul>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Controller Demo</h2>
+
+  <div id="calc1App" class="pull-left" ng-app="calc1App" ng-controller="calc1Ctrl" style="width:20%">
+    <form ng-submit="calculatePay()">
+      <label>Days Furloughed:</label>
+      <br/>
+      <input ng-model="days" />
+      <br/>
+      <label>Hourly Rate:</label>
+      <br/>
+      <input ng-model="rate" />
+      <br/>
+      <input type="submit" value="Calculate"/>
+      <br/>
+    </form>
+    <h4>Pay missed: ${{pay}}</h4>
+  </div>
+  <script>
+    function calc1Ctrl($scope){
+      $scope.pay = 0;
+      $scope.days = 0;
+      $scope.rate = 0;
+      $scope.calculatePay = function(){
+        $scope.pay = ($scope.days * 8) * $scope.rate;
+      }
+    }
+  </script>
+  <div style="width:45%;float:left;opacity:100;" class="slide">
+    <ul class="nav nav-tabs" style="margin:0 50px -10px">
+      <li class="active"><a href="#calcHTML" data-toggle="tab">calc.html</a></li>
+      <li><a href="#calcJS" data-toggle="tab">calc.js</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id = "calcHTML" class="tab-pane active">
+        <pre ><code class="prettyprint">
+&lt;div ng-app ng-controller="calcCtrl"&gt;
+  &lt;form ng-submit="calculatePay()"&gt;
+    &lt;label&gt;Days Furloughed:&lt;/label&gt;
+    &lt;input ng-model="days" /&gt;
+    &lt;label&gt;Hourly Rate:&lt;/label&gt;
+    &lt;input ng-model="rate" /&gt;
+    &lt;input type="submit" value="Calculate"/&gt;
+  &lt;/form&gt;
+  &lt;h4&gt;Pay missed: ${{pay}}&lt;/h4&gt;
+&lt;/div&gt;
+        </code></pre>
+      </div>
+      <div id="calcJS" class="tab-pane">
+        <pre><code class="prettyprint">
+function calcCtrl($scope){
+  $scope.pay = 0;
+  $scope.days = 0;
+  $scope.rate = 0;
+  $scope.calculatePay = function(){
+    $scope.pay = ($scope.days * 8) * $scope.rate;
+  }
+}
+        </code></pre>
+      </div>
+    </div>
+  </div>
+  <ul class="pull-left" style="width:25%;">
+    <li class="slide">ng-controller: name of function that defines this controllers $scope and setup</li>
+    <li class="slide">ng-submit: expression to be run when the form is submited</li>
+    <li class="slide">calcCtrl: function referenced in the ng-controller, $scope parameter to define scope</li>
+  </ul>
+</section>
+<section class="slide">
+  <h2>Dependency Injection</h2>
+  <h3 class="slide">Design Pattern to reduce coupling & promote reuse</h3>
+  <h4 class="slide">Three ways to handle dependencies:</h4>
+  <ol>
+    <li class="slide">Dependency created with <i>new</i> operator</li>
+    <li class="slide">Dependency referenced by global reference</li>
+    <li class="slide">Dependency passed in to where it is needed</li>
+  </ol>
+  <h4 class="slide">First two ways are not ideal</h4>
+  <h4 class="slide">Example of how this could be solved with vanilla JS:</h4>
+  <pre class="slide"><code class="prettyprint">
+function SomeClass(someActor) {
+  this.actor = someActor;
+}
+
+SomeClass.prototype.doSomething = function(param) {
+  this.actor.doAction(param);
+}
+  </code></pre>
+
+
+</section>
+
+<section class="slide">
+  <h2>Dependency Injection with AngularJS</h2>
+  <h3 class="slide">Angular apps have an injector</h3>
+  <h4 class="slide">Used as a service locator</h4>
+  <pre class="slide"><code class="prettyprint">
+var injector = angular.injector(['myModule', 'ng']);
+var actor = injector.get('someActor');
+  </code></pre>
+  <h4 class="slide">Not efficent use of the injector, requires the injector to be passed around your application</h4>
+</section>
+
+<section class="slide">
+  <h2>Dependency Injection with AngularJS</h2>
+  <h3>Three ways to pass services to your controllers:</h3>
+  <ol>
+    <li class="slide">
+      <p>Infer Dependencies from parameter names</p>
+      <pre><code class="prettyprint">
+function MyController($scope, someActor) {...}
+      </code></pre>
+    </li>
+    <li class="slide">
+      <p>$inject Annotation</p>
+      <pre><code class="prettyprint">
+var MyController = function(a,b) {...}
+MyController.$inject = ['$scope','someActor'];
+    </code></pre>
+    </li>
+    <li class="slide">
+      <p>Inline Annotation</p>
+      <pre><code class="prettyprint">
+MyModule.controller('MyController',['$scope','someActor',function(a,b){...}]);
+      </code></pre>
+    </li>
+  </ol>
+</section>
+<section class="slide">
+  <h2>Creating Services with Factories</h2>
+  <h3 class="slide">We can register our own services into the injector</h3>
+  <h3 class="slide">A factory is a function that returns some service object</h3>
+  <h3 class="slide">You do not register service instances, you register the factory that creates the service</h3>
+  <h3 class="slide">services are application singletons, only one instance of a service per injector</h3>
+</section>
+<section class="slide">
+  <h2>Service Demo</h2>
+
+  <div id="calcApp" class="pull-left" ng-app="calcApp" ng-controller="calcCtrl" style="width:20%">
+    <form ng-submit="calculatePay()">
+      <label>Days Furloughed:</label>
+      <br/>
+      <input ng-model="days" />
+      <br/>
+      <label>Hourly Rate:</label>
+      <br/>
+      <input ng-model="rate" />
+      <br/>
+      <input type="submit" value="Calculate"/>
+      <br/>
+    </form>
+    <h4>Pay missed: ${{pay}}</h4>
+  </div>
+  <script>
+    var calcModule = angular.module('calcApp',[]);
+    calcModule.factory('payService',function(){
+      var service = {};
+      service.calculatePay = function(days,rate){
+        return (days * 8) * rate;
+      };
+      return service;
+    });
+    calcModule.controller("calcCtrl",function($scope,payService){
+      $scope.pay = 0;
+      $scope.days = 0;
+      $scope.rate = 0;
+      $scope.calculatePay = function(){
+        $scope.pay = payService.calculatePay($scope.days,$scope.rate);
+      }
+    });
+  </script>
+  <div style="width:45%;float:left;opacity:100;" class="slide">
+    <ul class="nav nav-tabs" style="margin:0 50px -10px">
+      <li class="active"><a href="#calc2HTML" data-toggle="tab">calc.html</a></li>
+      <li><a href="#calc2JS" data-toggle="tab">calc.js</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id = "calc2HTML" class="tab-pane active">
+        <pre ><code class="prettyprint">
+&lt;div ng-app="calcApp" ng-controller="calcCtrl"&gt;
+  &lt;form ng-submit="calculatePay()"&gt;
+    &lt;label&gt;Days Furloughed:&lt;/label&gt;
+    &lt;input ng-model="days" /&gt;
+    &lt;label&gt;Hourly Rate:&lt;/label&gt;
+    &lt;input ng-model="rate" /&gt;
+    &lt;input type="submit" value="Calculate"/&gt;
+  &lt;/form&gt;
+  &lt;h4&gt;Pay missed: ${{pay}}&lt;/h4&gt;
+&lt;/div&gt;
+        </code></pre>
+      </div>
+      <div id="calc2JS" class="tab-pane">
+        <pre><code class="prettyprint">
+var calcModule = angular.module('calcApp',[]);
+calcModule.factory('payService',function(){
+  var service = {};
+  service.calculatePay = function(days,rate){
+    return (days * 8) * rate;
+  };
+  return service;
+});
+calcModule.controller("calcCtrl",function($scope,payService){
+  $scope.pay = 0;
+  $scope.days = 0;
+  $scope.rate = 0;
+  $scope.calculatePay = function(){
+    $scope.pay = payService.calculatePay($scope.days,$scope.rate);
+  }
+});
+        </code></pre>
+      </div>
+    </div>
+  </div>
+  <ul class="pull-left" style="width:25%;">
+    <li class="slide">ng-app: now has a name</li>
+    <li class="slide">angular module is explicitly defined</li>
+    <li class="slide">service defined through a factory</li>
+    <li class="slide">controller now defined through the module</li>
+    <li class="slide">service is injected into the controller through its parameters</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>Directives</h2>
+  <h3 class="slide">"Teaching HTML new tricks"</h3>
+  <h3 class="slide">Extending the sematics of HTML</h3>
+</section>
+<section class="slide">
+  <h2>Directive Demo</h2>
+
+  <div id="timeApp" class="pull-left" ng-app="timeApp" ng-controller="timeCtrl" style="width:20%">
+      <label>Start of Furlough:</label>
+      <input ng-model="startDate" />
+      <br/>
+      <label>Hourly Rate:</label>
+      <br/>
+      <input ng-model="rate" />
+      <br/>
+      <h4>Pay Missed: <timer start-date="startDate" rate="rate"></timer></h4>
+  </div>
+  <script>
+    var timeModule = angular.module('timeApp',[])
+    .directive('timer',function($timeout,$filter){
+      return {
+        restrict: 'E',
+        link: function(scope,element,attrs){
+          var timeoutId,rate,startDate;
+          function updateAmount(){
+            var diffMs = (new Date() - startDate);
+            var diffHrs = diffMs/ (1000*60*60);
+            var pay = diffHrs * rate;
+            element.text($filter('currency')(pay));
+          }
+          function tick(){
+            timeoutId = $timeout(function(){
+              updateAmount();
+              tick();
+            },1000);
+          }
+
+          scope.$watch(attrs.startDate,function(value){
+            startDate = new Date(value);
+            updateAmount();
+          });
+          scope.$watch(attrs.rate,function(value){
+            rate = value;
+            updateAmount();
+          });
+          element.on('$destroy', function() {
+            $timeout.cancel(timeoutId);
+          });
+
+          tick();
+        }
+      };
+    });
+    timeCtrl = function($scope){
+      $scope.rate=15;
+      $scope.startDate = '10-01-2013';
+    };
+  </script>
+  <div style="width:80%;float:left;opacity:100;" class="slide">
+    <ul class="nav nav-tabs" style="margin:0 50px -10px">
+      <li class="active"><a href="#timeHTML" data-toggle="tab">calc.html</a></li>
+      <li><a href="#timeJS" data-toggle="tab">calc.js(part 1)</a></li>
+      <li><a href="#timeJS2" data-toggle="tab">calc.js(part 2)</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id = "timeHTML" class="tab-pane active">
+        <pre ><code class="prettyprint">
+&lt;div ng-app="timeApp" ng-controller="timeCtrl"&gt;
+    &lt;label&gt;Start of Furlough:&lt;/label&gt;
+    &lt;input ng-model="startDate" /&gt;
+    &lt;br/&gt;
+    &lt;label&gt;Hourly Rate:&lt;/label&gt;
+    &lt;br/&gt;
+    &lt;input ng-model="rate" /&gt;
+    &lt;br/&gt;
+    &lt;h4&gt;Pay Missed: &lt;timer start-date="startDate" rate="rate"&gt;&lt;/timer&gt;&lt;/h4&gt;
+&lt;/div&gt;
+        </code></pre>
+      </div>
+      <div id="timeJS" class="tab-pane">
+        <pre><code class="prettyprint">
+var timeModule = angular.module('timeApp',[])
+.directive('timer',function($timeout,$filter){
+  return {
+    restrict: 'E',
+    link: function(scope,element,attrs){
+      var timeoutId,rate,startDate;
+      function updateAmount(){
+        var diffMs = (new Date() - startDate);
+        var diffHrs = diffMs/ (1000*60*60);
+        var pay = diffHrs * rate;
+        element.text($filter('currency')(pay));
+      }
+      function tick(){
+        timeoutId = $timeout(function(){
+          updateAmount();
+          tick();
+        },1000);
+      }
+        </code></pre>
+      </div>
+      <div id="timeJS2" class="tab-pane">
+        <pre><code class="prettyprint">
+      scope.$watch(attrs.startDate,function(value){
+        startDate = new Date(value);
+        updateAmount();
+      });
+      scope.$watch(attrs.rate,function(value){
+        rate = value;
+        updateAmount();
+      });
+      element.on('$destroy', function() {
+        $timeout.cancel(timeoutId);
+      });
+      tick();
+    }
+  };
+});
+timeCtrl = function($scope){
+  $scope.rate=15;
+  $scope.startDate = '10-01-2013';
+};
+      </code></pre>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Angular Resources</h2>
+  <ul>
+    <li>http://angularjs.org/ - Angular homepage</li>
+    <li>https://github.com/angular/angular.js - Github repo</li>
+    <li>egghead.io - Short, episodic Angular tutorials</li>
+    <li>http://www.youtube.com/user/dwahlin - Angular in 60 minutes</li>
+  </ul>
+</section>
+
+
+</section>
+<section class="slide">
+	<h1>Questions?</h1>
+</section>
+<!-- End slides. -->
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+  var helloModule = angular.module("helloApp",[]);
+    var calc1Module = angular.module("calc1App",[]);
+    calc1Module.controller("calc1Ctrl",calc1Ctrl);
+    angular.bootstrap(document.getElementById("calcApp"),['calcApp']);
+    angular.bootstrap(document.getElementById("calc1App"),['calc1App']);
+    angular.bootstrap(document.getElementById("helloApp"),['helloApp']);
+    angular.bootstrap(document.getElementById("timeApp"),['timeApp']);
+</script>
+</body>
+</html>
